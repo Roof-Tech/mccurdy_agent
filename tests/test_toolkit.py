@@ -29,8 +29,10 @@ def test_minimum_job_applies_to_small_roofs():
 
 def test_apoc_minimum_mils_show_on_options():
     opts = {o.key: o for o in build_options(JOB, CFG["pricing"], CFG["manufacturers"])}
-    assert "minimum 47 total dry mils" in opts["best"].coats
-    assert "minimum 23 total dry mils" in opts["good"].coats
+    assert "ASC minimum 56 total dry mils" in opts["best"].coats
+    assert "ASC minimum 30 total dry mils" in opts["good"].coats
+    apoc = {o.key: o for o in build_options({**JOB, "manufacturer": "APOC"}, CFG["pricing"], CFG["manufacturers"])}
+    assert "APOC minimum 47 total dry mils" in apoc["best"].coats
     no_mfr = {**JOB, "manufacturer": None}
     assert "dry mils" not in build_options(no_mfr, CFG["pricing"], CFG["manufacturers"])[0].coats
 
