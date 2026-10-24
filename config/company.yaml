@@ -2,15 +2,16 @@
 # Fill in the REPLACE_ME values once; everything else reads from here.
 company:
   name: McCurdy Coatings
-  tagline: Commercial Roof Renewal · Central Valley
-  legal_name: McCurdy Coatings            # exact name on your CSLB license
-  license: "REPLACE_ME"                   # CSLB license # (required by CA law on bids/contracts)
-  phone: "REPLACE_ME"
-  email: "REPLACE_ME@mccurdycoatings.com"
-  website: "REPLACE_ME"
-  address: "REPLACE_ME, Fresno, CA"
-  service_area: Fresno, Madera, Merced, Kings, Tulare, Kern, Stanislaus and San Joaquin counties
-  signer_name: "REPLACE_ME"               # who signs proposals for McCurdy
+  tagline: Commercial Roof Coatings · Bay Area & Central Valley · Since 1985
+  legal_name: Mike McCurdy Roofing Inc.   # McCurdy Coatings is its subsidiary; confirm this matches your CSLB record
+  license: "477152"                       # CSLB C-39 Roofing (from mccurdycoatings.com)
+  phone: "(650) 952-0233"
+  mobile: "(650) 808-5469"
+  email: "mccurdycoatings@gmail.com"
+  website: "mccurdycoatings.com"
+  address: "371 Shaw Rd, South San Francisco, CA 94080"
+  service_area: San Francisco Bay Area and Central Valley (40+ Northern California cities)
+  signer_name: Mike McCurdy
   signer_title: Owner
 
 # Brand palette (green / blue / white / black)

@@ -5,7 +5,7 @@
 
 Hi {first_name},
 
-I'm {sender_name} with {company_name}. We renew commercial flat roofs here in the Central Valley. Instead of a tear-off, we seal and re-surface the roof you already have with a silicone system that carries a manufacturer warranty of up to 20 years.
+I'm {sender_name} with {company_name}. We renew commercial flat roofs across the Bay Area and Central Valley, and have since 1985. Instead of a tear-off, we seal and re-surface the roof you already have with a silicone system that carries a manufacturer warranty of up to 20 years.
 
 At about {building_sqft} sq ft, a roof like the one at {site_address} usually costs **40–70% less** to renew than to replace. Your tenants keep working while we do it.
 

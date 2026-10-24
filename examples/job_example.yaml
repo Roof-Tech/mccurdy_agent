@@ -2,7 +2,7 @@
 #   python -m mccurdy proposal examples/job_example.yaml
 proposal_number: MCC-2026-0142
 date: 2026-10-24
-estimator: REPLACE_ME
+estimator: Mike McCurdy
 customer:
   name: Dana Ortiz
   company: Valley Logistics Partners LLC

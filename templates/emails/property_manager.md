@@ -4,7 +4,7 @@
 
 Hi {first_name},
 
-I'm {sender_name} with {company_name}. We help Central Valley property managers turn roof problems into planned, budgeted projects instead of emergency calls.
+I'm {sender_name} with {company_name}. We help Bay Area and Central Valley property managers turn roof problems into planned, budgeted projects instead of emergency calls.
 
 We'll inspect the roof at {site_address} for free and give you a **written condition report with photos, a moisture check and three priced options**. You can take it straight to ownership.
 
