@@ -7,7 +7,7 @@ from openpyxl import load_workbook
 from mccurdy.config import load_config, load_yaml, ROOT
 from mccurdy.followup import build_drafts, load_sequence, read_prospects
 from mccurdy.invoice import build_invoice, invoice_totals
-from mccurdy.pricing import build_options, payment_schedule, replacement_comparison
+from mccurdy.pricing import build_options, payment_schedule, value_summary
 from mccurdy.proposal import build_proposal
 from mccurdy import prospects as pr
 
@@ -27,13 +27,13 @@ def test_minimum_job_applies_to_small_roofs():
     assert all(o.total == CFG["pricing"]["minimum_job"] for o in build_options(small, CFG["pricing"]))
 
 
-def test_replacement_comparison_uses_configured_percentages():
+def test_value_summary_leads_with_warranty_years():
     opts = {o.key: o for o in build_options(JOB, CFG["pricing"])}
-    comp = replacement_comparison(CFG["pricing"], opts["good"])
-    assert comp["savings_percent"] == 40
-    assert comp["coating_cost"] / comp["replacement_cost"] == pytest.approx(0.60, abs=1e-4)
-    # 30-year NDL has no percentage: described in words, never a made-up number
-    assert replacement_comparison(CFG["pricing"], opts["best"]) is None
+    best = value_summary(CFG["pricing"], opts["best"])
+    assert best["warranty_years"] == 30 and best["extra_years_percent"] == 50  # 30 vs. a typical 20
+    assert best["savings_up_to_percent"] == 45
+    # shorter warranties never claim "more years"
+    assert value_summary(CFG["pricing"], opts["good"])["extra_years_percent"] == 0
 
 
 def test_payment_schedule_follows_mccurdy_terms():
@@ -55,7 +55,7 @@ def test_invoice_totals_and_pdf(tmp_path):
     inv = load_yaml(ROOT / "examples" / "invoice_example.yaml")
     inv["payments"] = [{"amount": 1000}]
     t = invoice_totals(inv, CFG)
-    assert t["balance"] == pytest.approx(43572 - 1000)
+    assert t["balance"] == pytest.approx(90470 - 1000)
     assert build_invoice(inv, tmp_path / "i.pdf", CFG).read_bytes().startswith(b"%PDF")
 
 

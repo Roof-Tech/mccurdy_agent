@@ -51,18 +51,15 @@ def build_options(job: dict, pricing: dict) -> list[Option]:
     return options
 
 
-def replacement_comparison(pricing: dict, option: Option) -> dict | None:
-    """Typical savings vs. a commercial roofing company's full replacement, from the tier's configured
-    percentage. None for tiers without one (20-30-yr NDL), which the proposal describes in words."""
-    pct = pricing["systems"][option.key].get("savings_vs_replacement_percent")
-    if not pct:
-        return None
-    replacement = round(option.total / (1 - float(pct) / 100), 2)
+def value_summary(pricing: dict, option: Option) -> dict:
+    """Warranty years first, price second: extra warranted years vs. a typical replacement-roof warranty,
+    and the single 'up to' savings figure. No per-job savings dollars are invented."""
+    base = int(pricing.get("typical_replacement_warranty_years", 20))
+    extra_pct = round(100 * (option.warranty_years - base) / base) if option.warranty_years > base else 0
     return {
-        "replacement_cost": replacement,
-        "coating_cost": option.total,
-        "savings": round(replacement - option.total, 2),
-        "savings_percent": float(pct),
+        "warranty_years": option.warranty_years,
+        "extra_years_percent": extra_pct,
+        "savings_up_to_percent": pricing.get("savings_up_to_percent"),
     }
 
 

@@ -26,29 +26,27 @@ brand:
   gray_light: "#F2F4F7"
 
 # Pricing defaults ($ per sq ft). EDIT the rates to match your real costs and margins.
-# savings_vs_replacement_percent: McCurdy's typical savings vs. a full roof replacement by a commercial
-# roofing company (5-yr 45%, 10-yr 40%, 15-yr 35%). 20-30-yr NDL systems: leave empty; they are
-# described as "slightly less than TPO, PVC or modified bitumen, with a warranty up to 10 years longer".
 pricing:
+  # Marketing figures (see docs/APPROVED_CLAIMS.md): renewals cost up to this much less than a full
+  # replacement by a commercial roofing company; compared against a typical 20-year membrane warranty.
+  savings_up_to_percent: 45
+  typical_replacement_warranty_years: 20
   systems:
     good:
       name: Silicone Renewal — 10-Year Warranty
       rate: 2.75
       coats: "Primer 1 gal + silicone 1–2 gal per 100 sq ft"
       warranty_years: 10
-      savings_vs_replacement_percent: 40
     better:
       name: Silicone Renewal — 15-Year Warranty
       rate: 3.40
       coats: "Primer 1 gal + silicone 1–2 gal per 100 sq ft"
       warranty_years: 15
-      savings_vs_replacement_percent: 35
     best:
       name: Silicone Renewal — 30-Year NDL Full System
       rate: 4.25
       coats: "Primer 1 gal + base 1–2 gal + contrasting top coat 2–2.5 gal per 100 sq ft"
       warranty_years: 30
-      savings_vs_replacement_percent:
   minimum_job: 7500
   # McCurdy standard terms (edit per job in the job file if different)
   payment_schedule:

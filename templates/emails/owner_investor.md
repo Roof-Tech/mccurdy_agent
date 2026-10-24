@@ -7,7 +7,7 @@ Hi {first_name},
 
 I'm {sender_name} with {company_name}. We renew commercial flat roofs across the Bay Area and Central Valley, and have since 1985. Instead of a tear-off, we seal and re-surface the roof you already have with a silicone system that carries a manufacturer warranty of up to 20 years.
 
-Our 10 and 15-year renewals typically cost **35–40% less** than a full replacement by a commercial roofing company, and our 30-year NDL system costs slightly less than a TPO, PVC or modified-bitumen roof while carrying a warranty up to 10 years longer. Your tenants keep working while we do it.
+Our full-system NDL warranties run up to **30 years**, up to 50% more warranted years than a typical new TPO, PVC or modified-bitumen roof, and a renewal costs **up to 45% less** than a full replacement. Your tenants keep working while we do it.
 
 Could I do a free roof check-up and send you a written condition report with photos? No cost and no obligation, and you keep the report either way.
 
@@ -29,9 +29,11 @@ Hi {first_name},
 
 Here's how renewal compares for a roof of about {building_sqft} sq ft:
 
-- **5, 10 and 15-year renewals:** typically 35–45% less than a full replacement by a commercial roofing company
-- **20 to 30-year NDL full system:** slightly less than TPO, PVC or modified bitumen, with a warranty up to 10 years longer
+- **Warranty:** manufacturer NDL up to 30 years, labor and materials, issued in writing after the manufacturer's own inspection
+- **Price:** up to 45% less than a full replacement by a commercial roofing company
 - **Every option:** no tear-off, no landfill waste, a reflective white surface, and 3 years of free inspections and maintenance
+
+One thing worth knowing when you compare bids: a 30-year NDL roof takes 4 to 5.5 gallons of coating on every 100 sq ft, and the manufacturer won't issue the warranty if a step is skipped. A price that can't cover that can't carry the warranty.
 
 Exact numbers depend on the roof's condition. I'd be glad to put real ones in writing for you.
 

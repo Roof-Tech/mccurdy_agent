@@ -7,7 +7,7 @@ Keep it short, polite and specific. The goal of every first contact is one thing
 > I'm calling about the building at [address]. Do you have a minute?
 >
 > We do free roof check-ups. We walk the roof, take core samples to see if the insulation's still dry, and send you a written report with photos. You keep it either way.
-> If the roof's still sound underneath, our renewals typically run 35 to 45 percent less than a full replacement from a commercial roofing company, and our 30-year NDL system carries a longer warranty than a new TPO or PVC roof. Your tenants keep working.
+> If the roof's still sound underneath, we can give you a manufacturer NDL warranty up to 30 years, longer than most new roofs carry, for up to 45 percent less than a full replacement. Your tenants keep working.
 >
 > Could I get on the roof [Tuesday or Thursday] this week?
 
@@ -15,6 +15,7 @@ Keep it short, polite and specific. The goal of every first contact is one thing
 **"We already have a roofer."** → Great. Do they do restoration coatings or mostly replacements? A second opinion in writing costs you nothing.
 **"Send me something."** → Happy to. What's the best email? I'll send a sample report and follow up [day].
 **"How much?"** → It depends on the roof's condition, which is why the check-up is free. For a [size] roof, renewal typically runs [range from your price sheet].
+**"Someone quoted half that."** → Ask them for the manufacturer's approval letter, a sample warranty and the gallons per square in writing. A 30-year roof takes 4 to 5.5 gallons on every 100 square feet. If the price can't cover the coating, it can't cover the warranty.
 
 ## Walk-in at a business park
 Ask for the manager or the owner's contact. Leave the one-page leave-behind with your card. Write down the building number, roof type you can see from the ground (parapets, HVAC units, ponding stains on walls), and who you talked to. Log it in the prospect sheet the same day.

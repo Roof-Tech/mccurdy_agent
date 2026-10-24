@@ -7,7 +7,7 @@ from reportlab.platypus import Image, KeepTogether, Paragraph, SimpleDocTemplate
 
 from .config import load_config, money
 from .pdfstyle import MARGIN, PAGE, branded_table, page_decorator, palette, styles
-from .pricing import build_options, payment_schedule, replacement_comparison
+from .pricing import build_options, payment_schedule, value_summary
 from .signature import SignatureBlock
 
 DEFAULT_SCOPE = [  # The McCurdy Method
@@ -77,7 +77,7 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
     number = job.get("proposal_number", f"MCC-{date:%Y%m%d}")
     options = build_options(job, pricing)
     recommended = next((o for o in options if o.recommended), options[-1])
-    comparison = replacement_comparison(pricing, recommended)
+    value = value_summary(pricing, recommended)
 
     doc = SimpleDocTemplate(str(out_path), pagesize=PAGE, leftMargin=MARGIN, rightMargin=MARGIN,
                             topMargin=1.15 * inch, bottomMargin=0.85 * inch,
@@ -109,13 +109,12 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
            f"<font color='{cfg['brand']['white']}' size=14><b>{recommended.name}</b></font><br/>"
            f"<font color='{cfg['brand']['white']}' size=10>{recommended.warranty_years}-year warranty · "
            f"{money(recommended.total)}</font>", st["body"]),
-        _p(f"<font color='{cfg['brand']['white']}' size=9>VS. A FULL ROOF REPLACEMENT</font><br/>"
-           + (f"<font color='{cfg['brand']['white']}' size=14><b>About {comparison['savings_percent']:g}% less</b></font><br/>"
-              f"<font color='{cfg['brand']['white']}' size=10>than a typical commercial roofing company, "
-              f"with no tear-off or shutdown</font>" if comparison else
-              f"<font color='{cfg['brand']['white']}' size=14><b>Up to 10 years longer warranty</b></font><br/>"
-              f"<font color='{cfg['brand']['white']}' size=10>for slightly less than a TPO, PVC or "
-              f"modified-bitumen roof</font>"), st["body"]),
+        _p(f"<font color='{cfg['brand']['white']}' size=9>VS. A NEW ROOF</font><br/>"
+           + (f"<font color='{cfg['brand']['white']}' size=14><b>+{value['extra_years_percent']}% more warranted years</b></font><br/>"
+              if value["extra_years_percent"] else
+              f"<font color='{cfg['brand']['white']}' size=14><b>Manufacturer-warranted</b></font><br/>")
+           + f"<font color='{cfg['brand']['white']}' size=10>and up to {value['savings_up_to_percent']}% less than a full "
+             f"replacement, with no tear-off or shutdown</font>", st["body"]),
     ]], colWidths=[full_w * 0.55, full_w * 0.45])
     callout.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (0, 0), c["blue"]), ("BACKGROUND", (1, 0), (1, 0), c["green"]),
@@ -184,11 +183,12 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
 
     # ── Comparison ──
     s.append(_p("Renewal vs. Replacement", st["h1"]))
-    typical = (f"About {comparison['savings_percent']:g}% less than a full replacement by a commercial roofing company"
-               if comparison else "Slightly less than a TPO, PVC or modified-bitumen roof")
+    typical = f"Up to {value['savings_up_to_percent']}% less than a full replacement by a commercial roofing company"
     comp = [["", "Tear-off & replace", f"McCurdy renewal ({recommended.warranty_years}-year)"],
             ["Typical cost", "Full replacement price", typical],
-            ["Warranty", "Typically up to 20 years", f"{recommended.warranty_years}-year manufacturer warranty"],
+            ["Warranty", f"Typically up to {pricing.get('typical_replacement_warranty_years', 20)} years",
+             f"{recommended.warranty_years}-year manufacturer warranty"
+             + (f" ({value['extra_years_percent']}% more years)" if value["extra_years_percent"] else "")],
             ["Business disruption", "Weeks of noise, debris, open roof", "Building stays open"],
             ["Landfill waste", "Old roof hauled to landfill", "Existing roof stays in place"],
             ["Energy", "Depends on new membrane", "Reflective white surface lowers roof temperature"],
@@ -196,6 +196,12 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
     comp = [[_p(cell, st["body"]) if r and cell else cell for cell in row] for r, row in enumerate(comp)]
     s.append(branded_table(comp, [1.6 * inch, (full_w - 1.6 * inch) / 2, (full_w - 1.6 * inch) / 2], cfg))
     s.append(_p("Typical figures from McCurdy Coatings projects. Your price above is firm for this roof.", st["small"]))
+    s.append(_p("Why a much lower bid can't carry the same warranty", st["h2"]))
+    s += _bullets([
+        "A 30-year NDL system needs 4 to 5.5 gallons of primer and silicone on every 100 sq ft; that material has to be in the price.",
+        "If one required step is skipped, or any area is under thickness, the manufacturer can refuse to issue the warranty.",
+        "Ask every bidder for the manufacturer's approval letter, a sample warranty, and gallons per square in writing.",
+    ], st)
 
     # ── Payment ──
     s.append(_p("Payment Schedule (recommended option)", st["h1"]))

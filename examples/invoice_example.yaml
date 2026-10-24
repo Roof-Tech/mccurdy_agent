@@ -9,8 +9,8 @@ bill_to:
   address_lines: [PO Box 1234, Fresno, CA 93725]
   email: dana@example.com
 items:
-  - description: "Deposit (30%) — Silicone Restoration 15-Year, 42,000 sq ft"
+  - description: "Progress billing (50%) — materials loaded, cleaning & sealing complete — 30-Year NDL Full System, 42,000 sq ft"
     quantity: 1
-    unit_price: 43572.00
+    unit_price: 90470.00
 payments: []
 #  - { date: 2026-11-05, method: ACH, amount: 20000 }
