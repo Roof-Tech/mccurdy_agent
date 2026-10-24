@@ -19,7 +19,7 @@ def test_options_price_every_tier_and_add_ons():
     opts = {o.key: o for o in build_options(JOB, CFG["pricing"])}
     # 42,000 sq ft x $3.40 + drains 6x185 + curbs 14x95
     assert opts["better"].total == pytest.approx(42000 * CFG["pricing"]["systems"]["better"]["rate"] + 1110 + 1330)
-    assert opts["better"].recommended and not opts["good"].recommended
+    assert opts["best"].recommended and not opts["better"].recommended
 
 
 def test_minimum_job_applies_to_small_roofs():
