@@ -75,7 +75,7 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
     date = dt.date.fromisoformat(str(job.get("date", dt.date.today())))
     valid_until = date + dt.timedelta(days=int(pricing["proposal_valid_days"]))
     number = job.get("proposal_number", f"MCC-{date:%Y%m%d}")
-    options = build_options(job, pricing)
+    options = build_options(job, pricing, cfg.get("manufacturers"))
     recommended = next((o for o in options if o.recommended), options[-1])
     value = value_summary(pricing, recommended)
 

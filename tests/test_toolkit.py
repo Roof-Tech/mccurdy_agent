@@ -27,6 +27,14 @@ def test_minimum_job_applies_to_small_roofs():
     assert all(o.total == CFG["pricing"]["minimum_job"] for o in build_options(small, CFG["pricing"]))
 
 
+def test_apoc_minimum_mils_show_on_options():
+    opts = {o.key: o for o in build_options(JOB, CFG["pricing"], CFG["manufacturers"])}
+    assert "minimum 47 total dry mils" in opts["best"].coats
+    assert "minimum 23 total dry mils" in opts["good"].coats
+    no_mfr = {**JOB, "manufacturer": None}
+    assert "dry mils" not in build_options(no_mfr, CFG["pricing"], CFG["manufacturers"])[0].coats
+
+
 def test_value_summary_leads_with_warranty_years():
     opts = {o.key: o for o in build_options(JOB, CFG["pricing"])}
     best = value_summary(CFG["pricing"], opts["best"])

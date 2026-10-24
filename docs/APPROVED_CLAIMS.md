@@ -12,6 +12,7 @@ If a claim isn't here, check with the owner before using it.
 | Warranty years vs. a new roof | Up to 50% more warranted years (30-year NDL vs. a typical 20-year TPO, PVC or modified-bitumen warranty) | Owner's comparison of manufacturer warranty terms |
 | Price | Up to 45% less than a full replacement by a commercial roofing company (lead with warranty years; price second) | McCurdy project history |
 | Why low bids can't carry the warranty | A 30-year NDL system needs 4–5.5 gallons of primer and silicone per 100 sq ft; skip one required step or come in under thickness and the manufacturer can refuse the warranty | Manufacturer specifications and McCurdy method |
+| APOC warranty | 10, 15, 20 and 30-year warranties at minimum 23, 31, 39 and 47 total dry mils | APOC rep Santiago, text message to Mike McCurdy (ask for the official warranty guide PDF for the file) |
 | Thickness | 5–10 mils over spec on standard renewals; 10–50% over required thickness on every 20 to 30-year NDL project to date | McCurdy mil-reading records |
 | Inspections | Manufacturer representative inspects every commercial job | McCurdy policy |
 | Aftercare | Free inspection and maintenance every year for the first 3 years | McCurdy policy |

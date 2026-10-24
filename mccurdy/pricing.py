@@ -28,7 +28,13 @@ class Option:
         return round(sum(i.total for i in self.items), 2)
 
 
-def build_options(job: dict, pricing: dict) -> list[Option]:
+def required_mils(manufacturers: dict, name: str | None, years: int) -> int | None:
+    """Manufacturer's minimum total dry mils for a warranty term, if we have it on file."""
+    table = (manufacturers or {}).get(name or "", {}).get("min_dry_mils", {})
+    return table.get(years) or table.get(str(years))
+
+
+def build_options(job: dict, pricing: dict, manufacturers: dict | None = None) -> list[Option]:
     """One Option per tier in config. Job-level `rate_overrides` and `add_ons` apply to every tier."""
     sqft = float(job["roof"]["square_feet"])
     overrides = job.get("rate_overrides", {})
@@ -43,8 +49,11 @@ def build_options(job: dict, pricing: dict) -> list[Option]:
         coating = LineItem(f"{tier['name']} — full McCurdy Method prep, repairs and grid-applied coating system",
                            sqft, "sq ft", rate)
         items = [coating, *add_ons]
-        opt = Option(key, tier["name"], tier.get("coats", "Per manufacturer specification"), tier["warranty_years"], items,
-                     key == recommended)
+        coats = tier.get("coats", "Per manufacturer specification")
+        mils = required_mils(manufacturers, job.get("manufacturer"), tier["warranty_years"])
+        if mils:
+            coats += f"; {job['manufacturer']} minimum {mils} total dry mils"
+        opt = Option(key, tier["name"], coats, tier["warranty_years"], items, key == recommended)
         if opt.total < minimum:
             opt.items.append(LineItem("Minimum project adjustment", 1, "ea", round(minimum - opt.total, 2)))
         options.append(opt)

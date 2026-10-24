@@ -13,6 +13,7 @@ roof:
   square_feet: 42000
   existing_type: modified bitumen (approx. 18 years old)
 recommended_option: best
+manufacturer: APOC   # shows APOC minimum dry mils on the proposal
 # rate_overrides: { better: 3.15 }   # optional per-job price change ($/sq ft)
 add_ons:
   - description: Replace 6 roof drain strainers and clear drain lines

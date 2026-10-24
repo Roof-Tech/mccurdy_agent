@@ -56,6 +56,13 @@ pricing:
   proposal_valid_days: 30
   sales_tax_on_materials_percent: 0  # set if you bill tax on materials
 
+# Minimum total dry mils (TDM) each manufacturer requires per warranty term.
+# Set `manufacturer:` in a job file to show these on the proposal.
+manufacturers:
+  APOC:
+    # Confirmed by APOC rep Santiago (text message to Mike McCurdy)
+    min_dry_mils: {10: 23, 15: 31, 20: 39, 30: 47}
+
 invoice:
   payment_terms_days: 15
   late_fee_note: A late fee of 1.5% per month may apply to balances past due.
