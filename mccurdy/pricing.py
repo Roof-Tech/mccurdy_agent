@@ -18,7 +18,7 @@ class LineItem:
 class Option:
     key: str
     name: str
-    dry_mils: int
+    coats: str
     warranty_years: int
     items: list[LineItem] = field(default_factory=list)
     recommended: bool = False
@@ -40,32 +40,37 @@ def build_options(job: dict, pricing: dict) -> list[Option]:
     options = []
     for key, tier in pricing["systems"].items():
         rate = float(overrides.get(key, tier["rate"]))
-        coating = LineItem(f"{tier['name']} — prep, repairs, primer and {tier['dry_mils']} dry-mil silicone system",
+        coating = LineItem(f"{tier['name']} — full McCurdy Method prep, repairs and grid-applied coating system",
                            sqft, "sq ft", rate)
         items = [coating, *add_ons]
-        opt = Option(key, tier["name"], tier["dry_mils"], tier["warranty_years"], items, key == recommended)
+        opt = Option(key, tier["name"], tier.get("coats", "Per manufacturer specification"), tier["warranty_years"], items,
+                     key == recommended)
         if opt.total < minimum:
             opt.items.append(LineItem("Minimum project adjustment", 1, "ea", round(minimum - opt.total, 2)))
         options.append(opt)
     return options
 
 
-def replacement_comparison(job: dict, pricing: dict, option: Option) -> dict:
-    """What the owner saves by renewing instead of tearing off and replacing."""
-    sqft = float(job["roof"]["square_feet"])
-    replacement = round(sqft * float(pricing["tear_off_replacement_rate"]), 2)
-    savings = round(replacement - option.total, 2)
+def replacement_comparison(pricing: dict, option: Option) -> dict | None:
+    """Typical savings vs. a commercial roofing company's full replacement, from the tier's configured
+    percentage. None for tiers without one (20-30-yr NDL), which the proposal describes in words."""
+    pct = pricing["systems"][option.key].get("savings_vs_replacement_percent")
+    if not pct:
+        return None
+    replacement = round(option.total / (1 - float(pct) / 100), 2)
     return {
         "replacement_cost": replacement,
         "coating_cost": option.total,
-        "savings": savings,
-        "savings_percent": round(100 * savings / replacement, 1) if replacement else 0.0,
+        "savings": round(replacement - option.total, 2),
+        "savings_percent": float(pct),
     }
 
 
-def payment_schedule(total: float, deposit_percent: float) -> list[tuple[str, float]]:
-    deposit = round(total * deposit_percent / 100, 2)
-    return [
-        (f"Deposit at signing ({deposit_percent:g}%)", deposit),
-        ("Balance at substantial completion", round(total - deposit, 2)),
-    ]
+def payment_schedule(total: float, schedule: list) -> list[tuple[str, float]]:
+    """schedule: [[milestone, percent], ...] — percentages should add up to 100."""
+    rows = [(m, round(total * float(pct) / 100, 2)) for m, pct in schedule]
+    # put any rounding cents on the last milestone so the rows add up exactly
+    diff = round(total - sum(a for _, a in rows), 2)
+    if rows and diff:
+        rows[-1] = (rows[-1][0], round(rows[-1][1] + diff, 2))
+    return rows

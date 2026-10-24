@@ -7,7 +7,7 @@ Hi {first_name},
 
 I'm {sender_name} with {company_name}. We renew commercial flat roofs across the Bay Area and Central Valley, and have since 1985. Instead of a tear-off, we seal and re-surface the roof you already have with a silicone system that carries a manufacturer warranty of up to 20 years.
 
-At about {building_sqft} sq ft, a roof like the one at {site_address} usually costs **40–70% less** to renew than to replace. Your tenants keep working while we do it.
+Our 10 and 15-year renewals typically cost **35–40% less** than a full replacement by a commercial roofing company, and our 30-year NDL system costs slightly less than a TPO, PVC or modified-bitumen roof while carrying a warranty up to 10 years longer. Your tenants keep working while we do it.
 
 Could I do a free roof check-up and send you a written condition report with photos? No cost and no obligation, and you keep the report either way.
 
@@ -23,14 +23,15 @@ Our check-up includes core samples to see if the insulation is still dry. That o
 
 {signature}
 
-## Step 3 — Day 10 — Subject: Renew vs. replace, the numbers
+## Step 3 — Day 10 — Subject: Renew vs. replace
 
 Hi {first_name},
 
-Here's a simple comparison for a building your size (about {building_sqft} sq ft):
+Here's how renewal compares for a roof of about {building_sqft} sq ft:
 
-- **Tear-off & replace:** roughly {replace_estimate}
-- **{company_name} silicone renewal:** roughly {renew_estimate}, with no tear-off and no landfill waste, plus a reflective white surface that lowers roof temperature
+- **5, 10 and 15-year renewals:** typically 35–45% less than a full replacement by a commercial roofing company
+- **20 to 30-year NDL full system:** slightly less than TPO, PVC or modified bitumen, with a warranty up to 10 years longer
+- **Every option:** no tear-off, no landfill waste, a reflective white surface, and 3 years of free inspections and maintenance
 
 Exact numbers depend on the roof's condition. I'd be glad to put real ones in writing for you.
 

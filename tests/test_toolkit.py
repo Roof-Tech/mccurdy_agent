@@ -18,7 +18,7 @@ JOB = load_yaml(ROOT / "examples" / "job_example.yaml")
 def test_options_price_every_tier_and_add_ons():
     opts = {o.key: o for o in build_options(JOB, CFG["pricing"])}
     # 42,000 sq ft x $3.40 + drains 6x185 + curbs 14x95
-    assert opts["better"].total == pytest.approx(42000 * 3.40 + 1110 + 1330)
+    assert opts["better"].total == pytest.approx(42000 * CFG["pricing"]["systems"]["better"]["rate"] + 1110 + 1330)
     assert opts["better"].recommended and not opts["good"].recommended
 
 
@@ -27,12 +27,22 @@ def test_minimum_job_applies_to_small_roofs():
     assert all(o.total == CFG["pricing"]["minimum_job"] for o in build_options(small, CFG["pricing"]))
 
 
-def test_replacement_comparison_and_schedule():
-    opt = next(o for o in build_options(JOB, CFG["pricing"]) if o.recommended)
-    comp = replacement_comparison(JOB, CFG["pricing"], opt)
-    assert comp["savings"] == pytest.approx(42000 * 11.0 - opt.total)
-    sched = payment_schedule(opt.total, 30)
-    assert sum(a for _, a in sched) == pytest.approx(opt.total)
+def test_replacement_comparison_uses_configured_percentages():
+    opts = {o.key: o for o in build_options(JOB, CFG["pricing"])}
+    comp = replacement_comparison(CFG["pricing"], opts["good"])
+    assert comp["savings_percent"] == 40
+    assert comp["coating_cost"] / comp["replacement_cost"] == pytest.approx(0.60, abs=1e-4)
+    # 30-year NDL has no percentage: described in words, never a made-up number
+    assert replacement_comparison(CFG["pricing"], opts["best"]) is None
+
+
+def test_payment_schedule_follows_mccurdy_terms():
+    total = 145_240.0
+    sched = payment_schedule(total, CFG["pricing"]["payment_schedule"])
+    assert sched[0] == ("No deposit required", 0)
+    assert sum(a for _, a in sched) == pytest.approx(total)
+    odd = payment_schedule(100.01, [["a", 50], ["b", 50]])
+    assert sum(a for _, a in odd) == pytest.approx(100.01)
 
 
 def test_proposal_pdf_has_fillable_signature_fields(tmp_path):
@@ -90,7 +100,8 @@ def test_prospects_xlsx_then_followup_drafts(tmp_path):
     steps = load_sequence("owner_investor")
     assert len(drafts) == len(back) * len(steps)
     assert "2650 S Chestnut Ave" in drafts[0]["subject"]
-    assert "{" not in drafts[0]["body"] and "128,400" in drafts[0]["body"]
+    assert all("{" not in d["body"] for d in drafts)
+    assert any("128,400" in d["body"] for d in drafts if "CHESTNUT" in d["property"])
 
 
 @pytest.mark.parametrize("segment", ["owner_investor", "property_manager", "realtor", "past_client"])

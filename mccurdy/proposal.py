@@ -10,15 +10,21 @@ from .pdfstyle import MARGIN, PAGE, branded_table, page_decorator, palette, styl
 from .pricing import build_options, payment_schedule, replacement_comparison
 from .signature import SignatureBlock
 
-DEFAULT_SCOPE = [
-    "Safety setup: fall-protection plan, rooftop access control and daily site cleanup.",
-    "Inspect and core-sample the roof; mark and replace wet or damaged insulation found.",
-    "Power-wash the full roof surface and let it dry completely.",
-    "Repair seams, blisters, splits and flashings; reinforce penetrations, drains and transitions with fabric.",
-    "Apply primer where the substrate needs it (adhesion-tested first).",
-    "Apply the silicone coating system in multiple passes to the specified dry-mil thickness.",
-    "Mil-gauge check across the roof, final walk-through with owner and photo documentation.",
-    "Register the manufacturer warranty and hand over the warranty and maintenance packet.",
+DEFAULT_SCOPE = [  # The McCurdy Method
+    "Remove and replace all soft spots, dry-rot wood and failed membrane before any other work.",
+    "Clear debris, sweep and blow off the roof; clear and test every drain.",
+    "Power-wash the roof, then wash again with the manufacturer-recommended cleaner.",
+    "Remove and replace every rusted, loose, missing, crushed or incorrect flashing, perimeter flashing, vent and drain.",
+    "Install new screens or grates on every drain; confirm an overflow drain on every low-slope area.",
+    "Fill all low spots and potential ponding areas.",
+    "Chalk-line the entire roof into 10 × 10 ft squares; roll on primer at 1 gallon per square to the manufacturer's specification.",
+    "Seal every detail: seams, exposed fasteners, flashings, cap metal, gravel stop, nosing, vents, pipe collars, drains, straps, "
+    "seismic braces, brackets, pitch pockets, sleepers, stanchions, standoffs, skylights, panels and sun tubes.",
+    "New grid, then the base coat at 1–2 gallons per square in one color.",
+    "20 to 30-year NDL systems: a third grid and a contrasting top coat at 2–2.5 gallons per square.",
+    "Manufacturer representative inspects the roof and mil readings on every commercial job.",
+    "Clean the roof, gutters, grounds and surrounding areas at the end of every work day; final roof walk with the owner "
+    "or our quality supervisor, with any item found scheduled and completed.",
 ]
 
 # Business & Professions Code §7030 notice for California contracts.
@@ -71,7 +77,7 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
     number = job.get("proposal_number", f"MCC-{date:%Y%m%d}")
     options = build_options(job, pricing)
     recommended = next((o for o in options if o.recommended), options[-1])
-    comparison = replacement_comparison(job, pricing, recommended)
+    comparison = replacement_comparison(pricing, recommended)
 
     doc = SimpleDocTemplate(str(out_path), pagesize=PAGE, leftMargin=MARGIN, rightMargin=MARGIN,
                             topMargin=1.15 * inch, bottomMargin=0.85 * inch,
@@ -102,11 +108,14 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
         _p(f"<font color='{cfg['brand']['white']}' size=9>OUR RECOMMENDATION</font><br/>"
            f"<font color='{cfg['brand']['white']}' size=14><b>{recommended.name}</b></font><br/>"
            f"<font color='{cfg['brand']['white']}' size=10>{recommended.warranty_years}-year warranty · "
-           f"{recommended.dry_mils} dry mils · {money(recommended.total)}</font>", st["body"]),
-        _p(f"<font color='{cfg['brand']['white']}' size=9>VS. TEAR-OFF &amp; REPLACE</font><br/>"
-           f"<font color='{cfg['brand']['white']}' size=14><b>Save {money(comparison['savings'])}</b></font><br/>"
-           f"<font color='{cfg['brand']['white']}' size=10>about {comparison['savings_percent']:g}% less, "
-           f"no tear-off, no business shutdown</font>", st["body"]),
+           f"{money(recommended.total)}</font>", st["body"]),
+        _p(f"<font color='{cfg['brand']['white']}' size=9>VS. A FULL ROOF REPLACEMENT</font><br/>"
+           + (f"<font color='{cfg['brand']['white']}' size=14><b>About {comparison['savings_percent']:g}% less</b></font><br/>"
+              f"<font color='{cfg['brand']['white']}' size=10>than a typical commercial roofing company, "
+              f"with no tear-off or shutdown</font>" if comparison else
+              f"<font color='{cfg['brand']['white']}' size=14><b>Up to 10 years longer warranty</b></font><br/>"
+              f"<font color='{cfg['brand']['white']}' size=10>for slightly less than a TPO, PVC or "
+              f"modified-bitumen roof</font>"), st["body"]),
     ]], colWidths=[full_w * 0.55, full_w * 0.45])
     callout.setStyle(TableStyle([
         ("BACKGROUND", (0, 0), (0, 0), c["blue"]), ("BACKGROUND", (1, 0), (1, 0), c["green"]),
@@ -153,19 +162,19 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
 
     # ── Options ──
     s += [_p("Investment Options", st["h1"]),
-          _p("Every option is a full silicone restoration over your existing roof. Thicker systems carry longer "
-             "manufacturer warranties.", st["body"]), Spacer(1, 0.1 * inch)]
-    rows = [["Option", "Dry mils", "Warranty", "Investment", "$ / sq ft"]]
+          _p("Every option follows the full McCurdy Method. Longer warranties add coats, measured by the grid, and "
+             "every warranty is issued in writing by the manufacturer.", st["body"]), Spacer(1, 0.1 * inch)]
+    rows = [["Option", "Coats", "Warranty", "Investment", "$ / sq ft"]]
     sqft = float(job["roof"]["square_feet"])
     for o in options:
         label = (f"<b>{o.name}</b><br/><font color='{cfg['brand']['green']}' size=8><b>RECOMMENDED</b></font>"
                  if o.recommended else o.name)
-        rows.append([_p(label, st["body"]), str(o.dry_mils),
+        rows.append([_p(label, st["body"]), _p(o.coats, st["small"]),
                      f"{o.warranty_years} yrs", money(o.total), f"${o.total / sqft:,.2f}"])
-    tbl = branded_table(rows, [3.0 * inch, 0.8 * inch, 0.9 * inch, 1.2 * inch, full_w - 5.9 * inch], cfg)
+    tbl = branded_table(rows, [2.3 * inch, 1.9 * inch, 0.8 * inch, 1.1 * inch, full_w - 6.1 * inch], cfg)
     rec_row = 1 + options.index(recommended)
     tbl.setStyle(TableStyle([("BACKGROUND", (0, rec_row), (-1, rec_row), c["green_light"]),
-                             ("ALIGN", (1, 0), (-1, -1), "RIGHT")]))
+                             ("ALIGN", (2, 0), (-1, -1), "RIGHT")]))
     s.append(tbl)
 
     if job.get("add_ons"):
@@ -175,22 +184,24 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
 
     # ── Comparison ──
     s.append(_p("Renewal vs. Replacement", st["h1"]))
-    comp = [["", "Tear-off & replace", f"McCurdy renewal ({recommended.key.title()})"],
-            ["Estimated cost", money(comparison["replacement_cost"]), money(comparison["coating_cost"])],
+    typical = (f"About {comparison['savings_percent']:g}% less than a full replacement by a commercial roofing company"
+               if comparison else "Slightly less than a TPO, PVC or modified-bitumen roof")
+    comp = [["", "Tear-off & replace", f"McCurdy renewal ({recommended.warranty_years}-year)"],
+            ["Typical cost", "Full replacement price", typical],
+            ["Warranty", "Typically up to 20 years", f"{recommended.warranty_years}-year manufacturer warranty"],
             ["Business disruption", "Weeks of noise, debris, open roof", "Building stays open"],
             ["Landfill waste", "Old roof hauled to landfill", "Existing roof stays in place"],
             ["Energy", "Depends on new membrane", "Reflective white surface lowers roof temperature"],
-            ["Future", "Start over at end of life", "Re-coat to extend life again"],
-            ["You save", "", f"{money(comparison['savings'])} ({comparison['savings_percent']:g}%)"]]
+            ["Future", "Start over at end of life", "Re-coat to extend life again"]]
     comp = [[_p(cell, st["body"]) if r and cell else cell for cell in row] for r, row in enumerate(comp)]
-    s.append(branded_table(comp, [1.6 * inch, (full_w - 1.6 * inch) / 2, (full_w - 1.6 * inch) / 2], cfg,
-                           total_rows=1))
-    s.append(_p("Replacement estimate uses a typical regional tear-off rate for comparison only.", st["small"]))
+    s.append(branded_table(comp, [1.6 * inch, (full_w - 1.6 * inch) / 2, (full_w - 1.6 * inch) / 2], cfg))
+    s.append(_p("Typical figures from McCurdy Coatings projects. Your price above is firm for this roof.", st["small"]))
 
     # ── Payment ──
     s.append(_p("Payment Schedule (recommended option)", st["h1"]))
     sched = [["Milestone", "Amount"]] + [[m, money(a)] for m, a in
-                                         payment_schedule(recommended.total, pricing["deposit_percent"])]
+                                         payment_schedule(recommended.total,
+                                                          job.get("payment_schedule", pricing["payment_schedule"]))]
     sched.append(["Total", money(recommended.total)])
     t = branded_table(sched, [full_w - 1.6 * inch, 1.6 * inch], cfg, total_rows=1)
     t.setStyle(TableStyle([("ALIGN", (1, 0), (1, -1), "RIGHT")]))
@@ -200,9 +211,12 @@ def build_proposal(job: dict, out_path: str | Path, cfg: dict | None = None) -> 
     # ── Warranty & maintenance ──
     s += [_p("Warranty &amp; Care", st["h1"])]
     s += _bullets(job.get("warranty_notes", [
-        "Manufacturer material warranty matched to the option chosen.",
-        f"{co['name']} workmanship warranty: {job.get('workmanship_years', 2)} years.",
-        "Optional yearly roof check-up and drain cleaning plan keeps the warranty in good standing.",
+        "Manufacturer warranty matched to the option chosen; 20 to 30-year systems carry a no-dollar-limit (NDL) "
+        "full-system warranty covering labor and materials.",
+        "No upcharge for the warranty. Delivered in writing within 30 days of completion.",
+        "Free roof inspection and any needed maintenance every year for the first 3 years, with a written report.",
+        "Your roof record (proposal, warranty, product data, photos, mil readings and maintenance reports) is "
+        "available to your whole management team in one link.",
     ]), st)
 
     # ── Terms ──

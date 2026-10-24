@@ -10,7 +10,7 @@ from pathlib import Path
 
 from openpyxl import load_workbook
 
-from .config import ROOT, load_config, money
+from .config import ROOT, load_config
 
 TEMPLATES = ROOT / "templates" / "emails"
 STEP_RE = re.compile(r"^## Step (\d+) — Day (\d+) — Subject: (.+)$", re.M)
@@ -56,8 +56,6 @@ class _Safe(dict):
 def personalize(text: str, p: dict, cfg: dict) -> str:
     co = cfg["company"]
     sqft = float(re.sub(r"[^0-9.]", "", str(p.get("building_sqft") or 0)) or 0)
-    pricing = cfg["pricing"]
-    better = pricing["systems"].get("better") or next(iter(pricing["systems"].values()))
     contact = str(p.get("contact_name") or p.get("first_name") or "").strip()
     first = contact.split()[0].title() if contact else "there"
     signature = (f"{co['signer_name']}\n{co['signer_title']}, {co['name']}\n{co['phone']} · {co['email']}\n"
@@ -67,8 +65,6 @@ def personalize(text: str, p: dict, cfg: dict) -> str:
         site_address=_tidy(p.get("site_address") or p.get("name")) or "your building",
         city=_tidy(p.get("city")) or "the Central Valley",
         building_sqft=f"{sqft:,.0f}" if sqft else "your",
-        replace_estimate=money(sqft * pricing["tear_off_replacement_rate"]) if sqft else "much more",
-        renew_estimate=money(sqft * better["rate"]) if sqft else "far less",
         sender_name=co["signer_name"],
         company_name=co["name"],
         signature=signature,

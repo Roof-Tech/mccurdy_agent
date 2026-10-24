@@ -25,27 +25,36 @@ brand:
   gray: "#5B6573"
   gray_light: "#F2F4F7"
 
-# Pricing defaults ($ per sq ft). EDIT THESE to match your real costs and margins.
+# Pricing defaults ($ per sq ft). EDIT the rates to match your real costs and margins.
+# savings_vs_replacement_percent: McCurdy's typical savings vs. a full roof replacement by a commercial
+# roofing company (5-yr 45%, 10-yr 40%, 15-yr 35%). 20-30-yr NDL systems: leave empty; they are
+# described as "slightly less than TPO, PVC or modified bitumen, with a warranty up to 10 years longer".
 pricing:
   systems:
     good:
-      name: Silicone Restoration — 10-Year
+      name: Silicone Renewal — 10-Year Warranty
       rate: 2.75
-      dry_mils: 20
+      coats: "Primer 1 gal + silicone 1–2 gal per 100 sq ft"
       warranty_years: 10
+      savings_vs_replacement_percent: 40
     better:
-      name: Silicone Restoration — 15-Year
+      name: Silicone Renewal — 15-Year Warranty
       rate: 3.40
-      dry_mils: 30
+      coats: "Primer 1 gal + silicone 1–2 gal per 100 sq ft"
       warranty_years: 15
+      savings_vs_replacement_percent: 35
     best:
-      name: Silicone Restoration — 20-Year NDL
+      name: Silicone Renewal — 30-Year NDL Full System
       rate: 4.25
-      dry_mils: 40
-      warranty_years: 20
-  tear_off_replacement_rate: 11.00   # for the "coating vs. replacement" comparison
+      coats: "Primer 1 gal + base 1–2 gal + contrasting top coat 2–2.5 gal per 100 sq ft"
+      warranty_years: 30
+      savings_vs_replacement_percent:
   minimum_job: 7500
-  deposit_percent: 30
+  # McCurdy standard terms (edit per job in the job file if different)
+  payment_schedule:
+    - ["No deposit required", 0]
+    - ["When materials are loaded on the roof and cleaning & sealing are complete", 50]
+    - ["Upon completion of the job", 50]
   proposal_valid_days: 30
   sales_tax_on_materials_percent: 0  # set if you bill tax on materials
 

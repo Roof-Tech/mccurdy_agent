@@ -7,7 +7,7 @@ Keep it short, polite and specific. The goal of every first contact is one thing
 > I'm calling about the building at [address]. Do you have a minute?
 >
 > We do free roof check-ups. We walk the roof, take core samples to see if the insulation's still dry, and send you a written report with photos. You keep it either way.
-> If the roof's still sound underneath, a silicone renewal usually costs 40 to 70 percent less than a tear-off, and your tenants keep working.
+> If the roof's still sound underneath, our renewals typically run 35 to 45 percent less than a full replacement from a commercial roofing company, and our 30-year NDL system carries a longer warranty than a new TPO or PVC roof. Your tenants keep working.
 >
 > Could I get on the roof [Tuesday or Thursday] this week?
 

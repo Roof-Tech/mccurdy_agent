@@ -1,4 +1,6 @@
 """Shared branded look for every McCurdy PDF (header band, footer, styles, tables)."""
+from pathlib import Path
+
 from reportlab.lib import colors
 from reportlab.lib.enums import TA_RIGHT
 from reportlab.lib.pagesizes import letter
@@ -7,6 +9,7 @@ from reportlab.lib.units import inch
 from reportlab.platypus import Table, TableStyle
 
 PAGE = letter
+LOGO_WHITE = Path(__file__).resolve().parent.parent / "brand" / "logo-horizontal-white.png"
 MARGIN = 0.75 * inch
 
 
@@ -70,12 +73,18 @@ def page_decorator(cfg: dict, doc_label: str):
         canvas.rect(0, h - 0.8 * inch, w, 0.8 * inch, stroke=0, fill=1)
         canvas.setFillColor(c["green"])
         canvas.rect(0, h - 0.86 * inch, w, 0.06 * inch, stroke=0, fill=1)
-        draw_logo(canvas, MARGIN, h - 0.68 * inch, 0.48 * inch, cfg)
+        if LOGO_WHITE.exists():
+            logo_h = 0.62 * inch
+            canvas.drawImage(str(LOGO_WHITE), MARGIN - 0.08 * inch, h - 0.72 * inch, width=logo_h * 1600 / 498,
+                             height=logo_h, mask="auto")
+        else:
+            draw_logo(canvas, MARGIN, h - 0.68 * inch, 0.48 * inch, cfg)
+            canvas.setFillColor(c["white"])
+            canvas.setFont("Helvetica-Bold", 15)
+            canvas.drawString(MARGIN + 0.62 * inch, h - 0.42 * inch, co["name"].upper())
+            canvas.setFont("Helvetica", 8.5)
+            canvas.drawString(MARGIN + 0.62 * inch, h - 0.58 * inch, co["tagline"])
         canvas.setFillColor(c["white"])
-        canvas.setFont("Helvetica-Bold", 15)
-        canvas.drawString(MARGIN + 0.62 * inch, h - 0.42 * inch, co["name"].upper())
-        canvas.setFont("Helvetica", 8.5)
-        canvas.drawString(MARGIN + 0.62 * inch, h - 0.58 * inch, co["tagline"])
         canvas.setFont("Helvetica-Bold", 10)
         canvas.drawRightString(w - MARGIN, h - 0.47 * inch, doc_label)
 
