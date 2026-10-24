@@ -16,7 +16,7 @@ If a claim isn't here, check with the owner before using it.
 | ASC milestone | 100,000+ gallons of ASC silicone installed | ASC-approved flyer |
 | ASC warranty mils | NDL 10 / 15 / 20 / 25 / 30 years at 30 / 38 / 44 / 51 / 56 dry mils (25 and 30 are extended programs) | ASC-approved flyer |
 | Product standard | We install only products with at least 10 years of proven field performance, from manufacturers with decades of stability | McCurdy policy (Mike Schirmer) |
-| Heritage | Family-owned · 40+ years of roofing · McCurdy Coatings is a DBA of McCurdy Roofing Inc. | Company records |
+| Heritage | Family-owned · roofing since 1985 · McCurdy Coatings (since 2021) is a DBA of Mike McCurdy Roofing Inc., one company and one CSLB license | Company records |
 | APOC warranty | 10, 15, 20 and 30-year warranties at minimum 23, 31, 39 and 47 total dry mils | APOC rep Santiago, text message to Mike McCurdy (ask for the official warranty guide PDF for the file) |
 | Thickness | 5–10 mils over spec on standard renewals; 10–50% over required thickness on every 20 to 30-year NDL project to date | McCurdy mil-reading records |
 | Inspections | Manufacturer representative inspects every commercial job | McCurdy policy |
