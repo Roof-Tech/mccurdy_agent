@@ -1,0 +1,16 @@
+# python -m mccurdy invoice examples/invoice_example.yaml
+invoice_number: INV-2026-0142-1
+date: 2026-11-02
+proposal_number: MCC-2026-0142
+job_site: 4800 E Jensen Ave, Fresno, CA 93725
+bill_to:
+  name: Dana Ortiz
+  company: Valley Logistics Partners LLC
+  address_lines: [PO Box 1234, Fresno, CA 93725]
+  email: dana@example.com
+items:
+  - description: "Deposit (30%) — Silicone Restoration 15-Year, 42,000 sq ft"
+    quantity: 1
+    unit_price: 43572.00
+payments: []
+#  - { date: 2026-11-05, method: ACH, amount: 20000 }

@@ -1,0 +1,44 @@
+# Example job — copy this file for each new bid, fill it in, then run:
+#   python -m mccurdy proposal examples/job_example.yaml
+proposal_number: MCC-2026-0142
+date: 2026-10-24
+estimator: REPLACE_ME
+customer:
+  name: Dana Ortiz
+  company: Valley Logistics Partners LLC
+  email: dana@example.com
+property:
+  address: 4800 E Jensen Ave, Fresno, CA 93725
+roof:
+  square_feet: 42000
+  existing_type: modified bitumen (approx. 18 years old)
+recommended_option: better
+# rate_overrides: { better: 3.15 }   # optional per-job price change ($/sq ft)
+add_ons:
+  - description: Replace 6 roof drain strainers and clear drain lines
+    quantity: 6
+    unit_price: 185
+  - description: Re-flash 14 HVAC curbs with reinforced silicone detail
+    quantity: 14
+    unit_price: 95
+summary: >-
+  Your roof membrane is aged but still watertight over most of the building. A silicone restoration
+  seals it, reflects Central Valley heat and adds up to 20 years of warranted life without a tear-off
+  or closing the warehouse.
+condition: >-
+  We walked the full roof on Oct 20. The modified bitumen is chalking and cracking from sun exposure,
+  with seam lifts at wall transitions and ponding in two low areas near the center drains. Core samples
+  showed dry insulation.
+key_issues:
+  - Sun damage and surface cracking across most of the field area
+  - Seam lifting at parapet walls and around HVAC curbs
+  - Ponding water (1–2 in.) at two center drains
+  - Four drain strainers missing or broken
+photos: []
+#  - path: photos/ponding.jpg
+#    caption: Ponding at center drain after rain
+exclusions:
+  - Interior repairs or ceiling tiles
+  - Structural deck replacement (priced separately if found)
+  - HVAC equipment work beyond curb flashing
+workmanship_years: 2

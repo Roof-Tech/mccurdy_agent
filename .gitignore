@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.venv/
+output/
+.pytest_cache/
+# customer data stays on your PC, not in git
+data/

@@ -1,0 +1,54 @@
+# McCurdy Coatings — company settings used on every proposal, invoice and email.
+# Fill in the REPLACE_ME values once; everything else reads from here.
+company:
+  name: McCurdy Coatings
+  tagline: Commercial Roof Renewal · Central Valley
+  legal_name: McCurdy Coatings            # exact name on your CSLB license
+  license: "REPLACE_ME"                   # CSLB license # (required by CA law on bids/contracts)
+  phone: "REPLACE_ME"
+  email: "REPLACE_ME@mccurdycoatings.com"
+  website: "REPLACE_ME"
+  address: "REPLACE_ME, Fresno, CA"
+  service_area: Fresno, Madera, Merced, Kings, Tulare, Kern, Stanislaus and San Joaquin counties
+  signer_name: "REPLACE_ME"               # who signs proposals for McCurdy
+  signer_title: Owner
+
+# Brand palette (green / blue / white / black)
+brand:
+  green: "#1E8A4C"      # primary — action, highlights, "renewal"
+  green_light: "#E8F5EE"
+  blue: "#0F3D6E"       # trust — headers, tables
+  blue_bright: "#2B7BC4"
+  black: "#0B0F14"
+  white: "#FFFFFF"
+  gray: "#5B6573"
+  gray_light: "#F2F4F7"
+
+# Pricing defaults ($ per sq ft). EDIT THESE to match your real costs and margins.
+pricing:
+  systems:
+    good:
+      name: Silicone Restoration — 10-Year
+      rate: 2.75
+      dry_mils: 20
+      warranty_years: 10
+    better:
+      name: Silicone Restoration — 15-Year
+      rate: 3.40
+      dry_mils: 30
+      warranty_years: 15
+    best:
+      name: Silicone Restoration — 20-Year NDL
+      rate: 4.25
+      dry_mils: 40
+      warranty_years: 20
+  tear_off_replacement_rate: 11.00   # for the "coating vs. replacement" comparison
+  minimum_job: 7500
+  deposit_percent: 30
+  proposal_valid_days: 30
+  sales_tax_on_materials_percent: 0  # set if you bill tax on materials
+
+invoice:
+  payment_terms_days: 15
+  late_fee_note: A late fee of 1.5% per month may apply to balances past due.
+  accepted_payments: ACH / bank transfer, check, or card (3% card fee)

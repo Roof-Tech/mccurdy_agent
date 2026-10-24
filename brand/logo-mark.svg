@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="McCurdy Coatings mark">
+  <rect width="120" height="120" rx="22" fill="#0F3D6E"/>
+  <path d="M18 60 L60 22 L102 60" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M60 46 C78 66 78 94 60 94 C42 94 42 66 60 46 Z" fill="#1E8A4C"/>
+  <path d="M53 78 C53 84 57 88 62 88" fill="none" stroke="#E8F5EE" stroke-width="3.5" stroke-linecap="round" opacity=".85"/>
+</svg>

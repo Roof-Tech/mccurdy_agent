@@ -1,0 +1,243 @@
+<title>McCurdy Coatings Brand Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=Source+Sans+3:wght@400;600;700&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: a spec sheet for a roofing crew — blue job-site band on top, then plain numbered-free sections on a cool white "finished roof" ground. */
+:root {
+  --green: #1E8A4C;
+  --green-soft: #E8F5EE;
+  --blue: #0F3D6E;
+  --blue-bright: #2B7BC4;
+  --ink: #0B0F14;
+  --paper: #FFFFFF;
+  --ground: #F5F7F9;
+  --muted: #5B6573;
+  --line: #DCE2E8;
+  --card: #FFFFFF;
+  --on-band: #FFFFFF;
+  --display: "Archivo", "Arial Black", Arial, sans-serif;
+  --body: "Source Sans 3", "Segoe UI", Arial, sans-serif;
+  --mono: "IBM Plex Mono", Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --green-soft: #12301F; --ink: #E9EEF3; --paper: #0B0F14; --ground: #0E141B;
+    --muted: #9AA6B4; --line: #223040; --card: #131B24; --blue-bright: #6FB0EC; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --green-soft: #12301F; --ink: #E9EEF3; --paper: #0B0F14; --ground: #0E141B;
+  --muted: #9AA6B4; --line: #223040; --card: #131B24; --blue-bright: #6FB0EC; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--ground); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; }
+.wrap { max-width: 1040px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+.band { background: #0F3D6E; color: var(--on-band); border-bottom: 6px solid #1E8A4C; }
+.band .wrap { padding-block: 40px 36px; display: grid; gap: 20px; }
+.band svg { width: min(420px, 100%); height: auto; }
+.band p { margin: 0; max-width: 60ch; color: #CFE0F0; font-size: 18px; }
+h1, h2, h3 { font-family: var(--display); text-wrap: balance; margin: 0; }
+h2 { font-size: 26px; font-weight: 800; color: var(--blue); letter-spacing: -0.01em; }
+:root[data-theme="dark"] h2 { color: #8CC3F2; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) h2 { color: #8CC3F2; } }
+h3 { font-size: 16px; font-weight: 700; }
+section { padding-block: 40px 8px; display: grid; gap: 18px; }
+.lede { color: var(--muted); max-width: 65ch; margin: 0; }
+.label { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.swatch { background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; }
+.chip { height: 92px; }
+.swatch div.meta { padding: 12px 14px 14px; display: grid; gap: 2px; min-width: 0; }
+.swatch b { font-family: var(--display); font-weight: 700; }
+.hex { font-family: var(--mono); font-size: 13px; color: var(--muted); }
+.swatch p { margin: 4px 0 0; font-size: 14px; color: var(--muted); }
+.ratio { display: flex; height: 34px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); }
+.ratio span { display: grid; place-items: center; font-family: var(--mono); font-size: 12px; color: #fff; }
+.type { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 22px; display: grid; gap: 14px; }
+.type .d { font-family: var(--display); font-weight: 900; font-size: clamp(30px, 6vw, 48px); line-height: 1.05; letter-spacing: -0.02em; }
+.type .b { font-size: 18px; max-width: 60ch; }
+.logos { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.logo-tile { border-radius: 10px; padding: 28px; display: grid; place-items: center; border: 1px solid var(--line); min-height: 150px; }
+.logo-tile.light { background: #FFFFFF; }
+.logo-tile.dark { background: #0F3D6E; }
+.logo-tile.black { background: #0B0F14; }
+.logo-tile svg { width: 100%; max-width: 300px; height: auto; }
+.logo-tile.mark svg { max-width: 110px; }
+.rules { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+.rule { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; }
+.rule ul { margin: 10px 0 0; padding-left: 18px; display: grid; gap: 6px; }
+.do h3 { color: var(--green); }
+.dont h3 { color: #B4372F; }
+.voice { display: grid; gap: 10px; }
+.say { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.say div { background: var(--card); padding: 12px 16px; min-width: 0; }
+.say .h { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); background: var(--ground); }
+.taglines { display: grid; gap: 10px; }
+.tag { background: var(--card); border-left: 5px solid var(--green); padding: 14px 18px; border-radius: 0 10px 10px 0; font-family: var(--display); font-weight: 700; font-size: 20px; }
+.tag small { display: block; font-family: var(--body); font-weight: 400; font-size: 14px; color: var(--muted); }
+.apps { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.app { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 6px; }
+.app p { margin: 0; font-size: 15px; color: var(--muted); }
+.sign { background: #FFFFFF; color: #0B0F14; border: 1px solid var(--line); border-radius: 10px; padding: 20px; overflow-x: auto; }
+footer { padding-block: 40px; color: var(--muted); font-size: 14px; }
+@media (max-width: 520px) { .say { grid-template-columns: 1fr; } .say .h:nth-child(2) { display: none; } }
+</style>
+
+<header class="band">
+  <div class="wrap">
+    <svg viewBox="0 0 520 120" role="img" aria-label="McCurdy Coatings">
+      <rect width="120" height="120" rx="22" fill="#1E8A4C"/>
+      <path d="M18 60 L60 22 L102 60" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M60 46 C78 66 78 94 60 94 C42 94 42 66 60 46 Z" fill="#FFFFFF"/>
+      <text x="142" y="64" font-family="Archivo, 'Arial Black', Arial, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="1">McCURDY</text>
+      <text x="144" y="98" font-family="Archivo, 'Arial Black', Arial, sans-serif" font-size="22" font-weight="600" fill="#9FD8B6" letter-spacing="7.5">COATINGS</text>
+    </svg>
+    <p>Brand guide for commercial roof renewal in the Central Valley. Use it for proposals, trucks, shirts, yard signs, emails and social posts, so every touchpoint looks like the same trusted company.</p>
+  </div>
+</header>
+
+<main class="wrap">
+  <section>
+    <h2>The mark</h2>
+    <p class="lede">A roof line over a drop of coating: the roof you already own, renewed. Use the horizontal logo where there's room, and the square mark for profile pictures, hard hats and favicons. Keep clear space around it equal to the height of the drop.</p>
+    <div class="logos">
+      <div class="logo-tile light">
+        <svg viewBox="0 0 520 120" role="img" aria-label="Logo on white">
+          <rect width="120" height="120" rx="22" fill="#0F3D6E"/>
+          <path d="M18 60 L60 22 L102 60" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M60 46 C78 66 78 94 60 94 C42 94 42 66 60 46 Z" fill="#1E8A4C"/>
+          <text x="142" y="64" font-family="Archivo, 'Arial Black', Arial, sans-serif" font-size="44" font-weight="800" fill="#0B0F14" letter-spacing="1">McCURDY</text>
+          <text x="144" y="98" font-family="Archivo, 'Arial Black', Arial, sans-serif" font-size="22" font-weight="600" fill="#1E8A4C" letter-spacing="7.5">COATINGS</text>
+        </svg>
+      </div>
+      <div class="logo-tile black">
+        <svg viewBox="0 0 520 120" role="img" aria-label="Logo on black">
+          <rect width="120" height="120" rx="22" fill="#1E8A4C"/>
+          <path d="M18 60 L60 22 L102 60" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M60 46 C78 66 78 94 60 94 C42 94 42 66 60 46 Z" fill="#FFFFFF"/>
+          <text x="142" y="64" font-family="Archivo, 'Arial Black', Arial, sans-serif" font-size="44" font-weight="800" fill="#FFFFFF" letter-spacing="1">McCURDY</text>
+          <text x="144" y="98" font-family="Archivo, 'Arial Black', Arial, sans-serif" font-size="22" font-weight="600" fill="#9FD8B6" letter-spacing="7.5">COATINGS</text>
+        </svg>
+      </div>
+      <div class="logo-tile light mark">
+        <svg viewBox="0 0 120 120" role="img" aria-label="Square mark">
+          <rect width="120" height="120" rx="22" fill="#0F3D6E"/>
+          <path d="M18 60 L60 22 L102 60" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M60 46 C78 66 78 94 60 94 C42 94 42 66 60 46 Z" fill="#1E8A4C"/>
+        </svg>
+      </div>
+    </div>
+    <p class="lede">Files: <code>brand/logo-horizontal.svg</code>, <code>brand/logo-horizontal-white.svg</code>, <code>brand/logo-mark.svg</code>. For a sign shop or embroidery, send the SVG and ask them to convert the text to outlines.</p>
+  </section>
+
+  <section>
+    <h2>Colors</h2>
+    <p class="lede">Green means renewal and savings. Blue means trust. White is the finished roof. Black is for words. Keep to roughly this balance on any piece:</p>
+    <div class="ratio" aria-label="Color balance">
+      <span style="flex:50;background:#FFFFFF;color:#0B0F14">White 50%</span>
+      <span style="flex:25;background:#0F3D6E">Blue 25%</span>
+      <span style="flex:15;background:#1E8A4C">Green 15%</span>
+      <span style="flex:10;background:#0B0F14">10%</span>
+    </div>
+    <div class="grid">
+      <div class="swatch"><div class="chip" style="background:#1E8A4C"></div><div class="meta"><b>Renewal Green</b><span class="hex">#1E8A4C · RGB 30 138 76</span><p>Buttons, highlights, savings figures, the recommended option.</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#0F3D6E"></div><div class="meta"><b>Valley Blue</b><span class="hex">#0F3D6E · RGB 15 61 110</span><p>Headers, tables, trucks, shirts, signs.</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#FFFFFF;border-bottom:1px solid #DCE2E8"></div><div class="meta"><b>Roof White</b><span class="hex">#FFFFFF</span><p>Main background. The color of a freshly coated roof.</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#0B0F14"></div><div class="meta"><b>Jobsite Black</b><span class="hex">#0B0F14 · RGB 11 15 20</span><p>Body text and the wordmark on light backgrounds.</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#2B7BC4"></div><div class="meta"><b>Sky Blue</b><span class="hex">#2B7BC4</span><p>Links and small accents only.</p></div></div>
+      <div class="swatch"><div class="chip" style="background:#E8F5EE"></div><div class="meta"><b>Mint Wash</b><span class="hex">#E8F5EE</span><p>Soft background behind good news: totals, savings boxes.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Type</h2>
+    <div class="type">
+      <span class="label">Headlines · Archivo Bold / Black</span>
+      <div class="d">Renew the roof you already own.</div>
+      <span class="label">Body · Source Sans 3</span>
+      <div class="b">We seal and re-surface your existing flat roof with a silicone system backed by a manufacturer warranty of up to 20 years, with no tear-off and no closing your building.</div>
+      <span class="label">Fallback when fonts aren't installed: Arial Black / Arial</span>
+    </div>
+  </section>
+
+  <section>
+    <h2>How we sound</h2>
+    <p class="lede">Plain, confident, specific. Talk like the person who walked the roof, not like an ad. Every claim should have a number, a photo or a warranty behind it.</p>
+    <div class="say">
+      <div class="h">Say</div><div class="h">Instead of</div>
+      <div>"We found ponding at two center drains, 1–2 inches deep."</div><div>"Your roof has some issues."</div>
+      <div>"About 60% less than a tear-off for your 42,000 sq ft roof."</div><div>"Huge savings!!"</div>
+      <div>"Your tenants keep working while we coat."</div><div>"Minimal disruption guaranteed."</div>
+      <div>"20-year manufacturer warranty at 40 dry mils."</div><div>"Lifetime-quality roof."</div>
+      <div>"Here's the written report with photos. It's yours either way."</div><div>"Act now, limited-time offer."</div>
+    </div>
+    <h3>Taglines</h3>
+    <div class="taglines">
+      <div class="tag">Renew. Don't replace.<small>Main line for trucks, signs and ads.</small></div>
+      <div class="tag">The Central Valley's commercial roof renewal company.<small>Website, Google profile, LinkedIn.</small></div>
+      <div class="tag">Honest work. Warranted roofs.<small>Shirts, proposals, email signature.</small></div>
+    </div>
+    <h3>Proof points to repeat everywhere</h3>
+    <ul class="lede">
+      <li>Free roof check-up with a written condition report, photos and moisture check</li>
+      <li>Three priced options in writing, with the renewal vs. replacement cost shown side by side</li>
+      <li>Manufacturer warranties of 10, 15 or 20 years, plus our own workmanship warranty</li>
+      <li>Licensed (CSLB #, always shown), insured, with a written safety plan on every roof</li>
+      <li>Yearly check-up plans that keep the warranty in good standing</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Do and don't</h2>
+    <div class="rules">
+      <div class="rule do"><h3>Do</h3><ul>
+        <li>Use real photos of your own roofs and crews: before, during, after.</li>
+        <li>Show the CSLB license number on every bid, truck and ad (California law).</li>
+        <li>Lead with the owner's money: cost per sq ft, savings vs. replacement, warranty years.</li>
+        <li>Keep layouts mostly white, with blue for structure and green for the one thing that matters.</li>
+      </ul></div>
+      <div class="rule dont"><h3>Don't</h3><ul>
+        <li>Stretch, recolor or add effects to the logo.</li>
+        <li>Put green text on blue (hard to read). Use white on blue.</li>
+        <li>Use stock photos of houses or shingle roofs. We do commercial flat roofs.</li>
+        <li>Promise tax savings or rebates. Point owners to their CPA and the program's official page.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Where it shows up</h2>
+    <div class="apps">
+      <div class="app"><h3>Trucks</h3><p>Valley Blue body or wrap, white logo, green stripe at the base. Phone, website and CSLB # large on both sides and the tailgate.</p></div>
+      <div class="app"><h3>Crew shirts &amp; hard hats</h3><p>Blue shirts with the white logo on the chest, "Renew. Don't replace." on the back. White hard hats with the square mark.</p></div>
+      <div class="app"><h3>Job-site signs</h3><p>18×24 in. white sign: logo, "Roof renewal in progress", phone, CSLB #. Ask the owner first; leave it up for 2 weeks after.</p></div>
+      <div class="app"><h3>Proposals &amp; invoices</h3><p>Generated by the toolkit: blue header band, green rule, savings call-out, fillable signature block.</p></div>
+      <div class="app"><h3>Google Business Profile</h3><p>Square mark as profile photo. Post a before/after every week, and ask every finished client for a review.</p></div>
+      <div class="app"><h3>Leave-behind</h3><p>One page: the renewal vs. replacement table, three warranty tiers, one case study, a QR code to book a check-up.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Email signature</h2>
+    <div class="sign">
+      <table cellpadding="0" cellspacing="0" style="font-family:Arial,Helvetica,sans-serif;color:#0B0F14;font-size:13px;line-height:1.45">
+        <tr>
+          <td style="padding-right:14px;border-right:3px solid #1E8A4C;vertical-align:top">
+            <svg width="64" height="64" viewBox="0 0 120 120" aria-hidden="true"><rect width="120" height="120" rx="22" fill="#0F3D6E"/><path d="M18 60 L60 22 L102 60" fill="none" stroke="#FFFFFF" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/><path d="M60 46 C78 66 78 94 60 94 C42 94 42 66 60 46 Z" fill="#1E8A4C"/></svg>
+          </td>
+          <td style="padding-left:14px;vertical-align:top">
+            <div style="font-size:15px;font-weight:bold;color:#0F3D6E">Your Name</div>
+            <div style="color:#1E8A4C;font-weight:bold">Owner · McCurdy Coatings</div>
+            <div>Commercial Roof Renewal · Central Valley</div>
+            <div>(559) 000-0000 · mccurdycoatings.com</div>
+            <div style="color:#5B6573;font-size:11px">CSLB Lic. #000000 · Licensed · Insured · Manufacturer-certified</div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <p class="lede">Example values shown. The editable version is <code>brand/email-signature.html</code>.</p>
+  </section>
+</main>
+
+<footer class="wrap">McCurdy Coatings brand guide · colors also in <code>brand/colors.json</code> and <code>config/company.yaml</code></footer>

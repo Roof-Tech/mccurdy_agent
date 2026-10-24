@@ -1,0 +1,10 @@
+{
+  "green":       { "hex": "#1E8A4C", "rgb": "30, 138, 76",  "use": "Primary action color: buttons, highlights, 'renewal', savings" },
+  "green_light": { "hex": "#E8F5EE", "rgb": "232, 245, 238", "use": "Soft backgrounds behind good news (recommended option, totals)" },
+  "blue":        { "hex": "#0F3D6E", "rgb": "15, 61, 110",  "use": "Trust color: headers, table headings, trucks, shirts" },
+  "blue_bright": { "hex": "#2B7BC4", "rgb": "43, 123, 196", "use": "Links and small accents only" },
+  "black":       { "hex": "#0B0F14", "rgb": "11, 15, 20",   "use": "Body text, wordmark on light backgrounds" },
+  "white":       { "hex": "#FFFFFF", "rgb": "255, 255, 255","use": "Backgrounds; the finished roof" },
+  "gray":        { "hex": "#5B6573", "rgb": "91, 101, 115", "use": "Secondary text, fine print" },
+  "gray_light":  { "hex": "#F2F4F7", "rgb": "242, 244, 247","use": "Table stripes, dividers" }
+}
