@@ -59,10 +59,17 @@ def shield(x, y, w, h):
             f"C{x + w * 0.28},{y + h * 0.92} {x},{y + h * 0.80} {x},{y + side} Z")
 
 
-def mark(cinzel, x, y, w, field=NAVY, ink=WHITE, accent=GREEN, accent2=GREEN_LIGHT):
+def mark(cinzel, x, y, w, field=NAVY, ink=WHITE, accent=GREEN, accent2=GREEN_LIGHT, primer=STEEL, simple=False):
     """The crest: navy shield, keyline, roof ridge, Cinzel M, and three coat bands (primer, base, top)."""
     h = w * 1.18
     parts = [f'<path d="{shield(x, y, w, h)}" fill="{field}"/>']
+    if simple:
+        # Small-size mark (favicons, 32 px and below): shield and a larger M only.
+        m_size = w * 0.66
+        _, mw = text_path(cinzel, "M", 0, 0, m_size)
+        d, _ = text_path(cinzel, "M", x + (w - mw) / 2, y + h * 0.70, m_size)
+        parts.append(f'<path d="{d}" fill="{ink}"/>')
+        return "\n  ".join(parts), h
     inset = w * 0.06
     parts.append(f'<path d="{shield(x + inset, y + inset * 1.15, w - 2 * inset, h - 2.3 * inset)}" '
                  f'fill="none" stroke="{ink}" stroke-opacity="0.55" stroke-width="{w * 0.012:.2f}"/>')
@@ -78,7 +85,7 @@ def mark(cinzel, x, y, w, field=NAVY, ink=WHITE, accent=GREEN, accent2=GREEN_LIG
     # three coats: primer / base / top
     bw, bh, gap = w * 0.46, h * 0.022, h * 0.022
     by = y + h * 0.72
-    for i, col in enumerate([STEEL, accent2, accent]):
+    for i, col in enumerate([primer, accent2, accent]):
         bx = x + (w - bw * (1 - i * 0.12)) / 2
         parts.append(f'<rect x="{bx:.2f}" y="{by + i * (bh + gap):.2f}" width="{bw * (1 - i * 0.12):.2f}" '
                      f'height="{bh:.2f}" fill="{col}"/>')
@@ -91,27 +98,28 @@ def svg(width, height, body, label, bg=None):
             f'width="{width:.0f}" height="{height:.0f}" role="img" aria-label="{label}">\n  {rect}{body}\n</svg>\n')
 
 
-def lockup(cinzel, dm, dark_bg=False):
-    """Horizontal logo: crest + McCURDY / COATINGS / tagline."""
+def lockup(cinzel, dm, dark_bg=False, one_color=None, tagline=True):
+    """Horizontal logo: crest + McCURDY / COATINGS / tagline. one_color = a single ink for vinyl/embroidery."""
     word = WHITE if dark_bg else NAVY
     sub = GREEN_LIGHT if dark_bg else GREEN
     tag = "#C9D3DD" if dark_bg else "#5B6573"
     field = GREEN if dark_bg else NAVY
-    crest, ch = mark(cinzel, 0, 0, 200, field=field, accent=WHITE if dark_bg else GREEN,
-                     accent2=GREEN_LIGHT)
+    if one_color:
+        word = sub = tag = field = one_color
+    crest, ch = mark(cinzel, 0, 0, 200, field=field, accent=WHITE if (dark_bg or one_color) else GREEN,
+                     accent2=WHITE if one_color else GREEN_LIGHT, primer=WHITE if one_color else STEEL)
     tx = 250
     d1, w1 = text_path(cinzel, "McCURDY", tx, 118, 112, tracking=0.02)
     d2, w2 = text_path(dm, "COATINGS", tx + 4, 178, 44, tracking=0.42)
     d3, w3 = text_path(dm, "COMMERCIAL ROOF RENEWAL  ·  EST. 1985", tx + 4, 226, 22, tracking=0.16)
     rule_y = 140
-    width = tx + max(w1, w2, w3) + 10
+    width = tx + max(w1, w2, w3 if tagline else 0) + 10
     body = "\n  ".join([
         crest,
         f'<path d="{d1}" fill="{word}"/>',
         f'<rect x="{tx + 4}" y="{rule_y}" width="{w1 - 4:.1f}" height="3" fill="{sub}"/>',
         f'<path d="{d2}" fill="{sub}"/>',
-        f'<path d="{d3}" fill="{tag}"/>',
-    ])
+    ] + ([f'<path d="{d3}" fill="{tag}"/>'] if tagline else []))
     return body, width, ch
 
 
@@ -146,6 +154,23 @@ def main(cinzel_path, dm_path):
         pad = 30
         (OUT / name).write_text(svg(w + 2 * pad, h + 2 * pad, f'<g transform="translate({pad},{pad})">{body}</g>',
                                     "McCurdy Coatings"))
+
+    # Compact (no tagline) for small uses: business-card fronts, email signatures, shirt chests
+    body, w, h = lockup(cinzel, dm, tagline=False)
+    (OUT / "logo-horizontal-compact.svg").write_text(
+        svg(w + 60, h + 60, f'<g transform="translate(30,30)">{body}</g>', "McCurdy Coatings"))
+    # One-color versions for vinyl, embroidery, stamps and single-color print
+    for ink, name in [(INK, "logo-horizontal-black.svg")]:
+        body, w, h = lockup(cinzel, dm, one_color=ink)
+        (OUT / name).write_text(svg(w + 60, h + 60, f'<g transform="translate(30,30)">{body}</g>', "McCurdy Coatings"))
+    body, h = mark(cinzel, 20, 20, 400, field=INK, accent=WHITE, accent2=WHITE, primer=WHITE)
+    (OUT / "logo-crest-black.svg").write_text(svg(440, h + 40, body, "McCurdy Coatings crest, one color"))
+    # Reversed crest for navy or dark backgrounds (a navy shield disappears there)
+    body, h = mark(cinzel, 20, 20, 400, field=GREEN, accent=WHITE)
+    (OUT / "logo-crest-reversed.svg").write_text(svg(440, h + 40, body, "McCurdy Coatings crest, for dark backgrounds"))
+    # Simplified mark for 32 px and below (favicon, app badge, hard-hat sticker under 1 in.)
+    body, h = mark(cinzel, 20, 20, 400, simple=True)
+    (OUT / "logo-favicon.svg").write_text(svg(440, h + 40, body, "McCurdy Coatings"))
 
     for dark, name in [(False, "logo-stacked.svg"), (True, "logo-stacked-white.svg")]:
         body, w, h = stacked(cinzel, dm, dark)
